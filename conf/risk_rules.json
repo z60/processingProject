@@ -1,0 +1,65 @@
+{
+  "version": "risk-rules-2026.10.14",
+  "handoff_rules": [
+    {
+      "id": "refund_gray_zone",
+      "desc": "退款/资金类意图且置信度落在灰色地带",
+      "when": {
+        "intents": ["refund"],
+        "confidence_between": [0.5, 0.9]
+      }
+    },
+    {
+      "id": "clarify_limit",
+      "desc": "连续 N 轮未解决",
+      "when": {
+        "clarify_rounds_gte": 3
+      }
+    },
+    {
+      "id": "explicit_human",
+      "desc": "用户显式要求人工",
+      "when": {
+        "text_patterns": ["转人工", "人工客服", "找人工", "要人工", "叫客服"]
+      }
+    },
+    {
+      "id": "forbidden_commitment",
+      "desc": "命中禁止承诺且无法安全重写",
+      "when": {
+        "forbidden_hit": "handoff"
+      }
+    }
+  ],
+  "forbidden_patterns": [
+    {
+      "id": "refund_amount_commit",
+      "desc": "承诺退款结果或金额",
+      "pattern": "(保证|一定|肯定|承诺)[^。；\\n]{0,10}(退|减免|免单|赔付)",
+      "action": "rewrite",
+      "replacement": "您的诉求已记录，具体处理结果以人工审核为准。"
+    },
+    {
+      "id": "privacy_commit",
+      "desc": "隐私泄露的绝对承诺",
+      "pattern": "(完全|绝对|百分百|100%)[^。；\\n]{0,8}(不泄露|保密|不会泄露)",
+      "action": "rewrite",
+      "replacement": "我们会按隐私政策与合规要求处理您的信息。"
+    },
+    {
+      "id": "credit_commit",
+      "desc": "额度/信用调整承诺",
+      "pattern": "(提升|调整|恢复|修改)[^。；\\n]{0,6}(额度|信用分|征信)",
+      "action": "handoff"
+    }
+  ],
+  "escalation_patterns": [
+    {
+      "id": "legal_threat",
+      "desc": "用户侧法律威胁/监管升级/投诉升级",
+      "pattern": "起诉|法院|律师|报警|监管|曝光|投诉到|投诉你们"
+    }
+  ],
+  "no_evidence_reply": "未找到相关制度条款",
+  "handoff_reply": "该诉求已转人工处理，工单号 {ticket_id}，人工客服会尽快与您联系。"
+}

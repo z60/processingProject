@@ -1,0 +1,29 @@
+{
+  "router": {
+    "min_confidence": 0.6,
+    "max_clarify_rounds": 3,
+    "parse_retry": 1
+  },
+  "risk": {
+    "refund_gray_zone": [0.5, 0.9],
+    "high_risk_intents": ["refund"]
+  },
+  "knowledge": {
+    "top_k": 4,
+    "min_score": 0.45,
+    "chunk_size": 180,
+    "chunk_overlap": 0
+  },
+  "cache": {
+    "cache_ttl_seconds": 3600,
+    "fail_counter_ttl_seconds": 604800,
+    "handoff_ttl_seconds": 2592000
+  },
+  "expert": {
+    "max_tool_rounds": 3
+  },
+  "eval": {
+    "min_pass_rate": 0.93,
+    "fail_on_high_risk_miss": true
+  }
+}

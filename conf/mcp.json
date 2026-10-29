@@ -1,0 +1,12 @@
+{
+  "version": "mcp-2026.10.14",
+  "servers": {
+    "ticket_tools": {
+      "transport": "stdio",
+      "command": "python",
+      "args": ["-m", "app.client.mcp_server"],
+      "timeout_seconds": 120,
+      "tools": ["query_order", "query_user_orders", "query_ticket", "search_knowledge"]
+    }
+  }
+}

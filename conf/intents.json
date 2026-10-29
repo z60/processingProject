@@ -1,0 +1,36 @@
+{
+  "version": "intents-2026.10.14",
+  "intents": [
+    {
+      "name": "knowledge_qa",
+      "label": "知识问答",
+      "expert": "knowledge_expert",
+      "description": "制度条款、售后政策、流程规则的解释类问题，需要带引用来源"
+    },
+    {
+      "name": "order_query",
+      "label": "订单查询",
+      "expert": "order_expert",
+      "description": "订单状态、物流、金额等结构化数据查询，必须调用业务系统"
+    },
+    {
+      "name": "ticket_progress",
+      "label": "工单进度",
+      "expert": "order_expert",
+      "description": "已提交工单的处理进度与流转状态查询"
+    },
+    {
+      "name": "refund",
+      "label": "退款/资金诉求",
+      "expert": "compliance_expert",
+      "high_risk": true,
+      "description": "退款、减免、额度调整等资金类诉求，AI 不输出最终处置"
+    },
+    {
+      "name": "complaint",
+      "label": "投诉/情绪激烈",
+      "expert": "compliance_expert",
+      "description": "投诉、强烈不满、威胁升级，需要降温并准备转人工"
+    }
+  ]
+}
